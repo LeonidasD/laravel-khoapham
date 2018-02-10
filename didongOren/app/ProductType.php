@@ -8,4 +8,17 @@ class ProductType extends Model
 {
     //
     protected $table = "product_type";
+    public $timestamps = false;
+
+    function Product(){
+        return $this->hasMany('App\Product','id_type','id');
+    }
+    function ProductBrand(){
+        return $this->belongsToMany(
+            'App\ProductBrand',
+            'product_brand_type',
+            'id_type',
+            'id_brand'
+        );
+    }
 }

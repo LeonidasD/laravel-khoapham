@@ -11,6 +11,31 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
+// Home Controller //
+Route::get('/',[
+    'uses' => 'HomeController@getHome',
+    'as' => 'home'
+]);
+
+// List Controller //
+Route::group(['prefix'=>'list'],function(){
+
+    Route::get('search/{page?}',[
+    'uses' => 'ListController@getSearchResult',
+    'as' => 'search'
+]);
+
+    Route::get('{id}/{page?}',[
+        'uses' => 'ListController@getProducts',
+        'as' => 'list'
+    ]);
+    
 });
+
+
+
+
+Route::get('detail/{id}',[
+   'uses' => 'DetailController@getDetail',
+   'as' => 'detail'
+]);
