@@ -32,10 +32,18 @@ Route::group(['prefix'=>'list'],function(){
     
 });
 
-
-
-
+// Detail Controller //
 Route::get('detail/{id}',[
    'uses' => 'DetailController@getDetail',
    'as' => 'detail'
+]);
+
+// Cart Controller //
+Route::get('cart',[
+    'uses' => 'CartController@getCart',
+    'as' => 'cart'
+]);
+Route::get('addToCart',[
+   'uses'  => 'CartController@addToCart',
+   'as' => 'addToCart'
 ]);

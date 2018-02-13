@@ -31,7 +31,6 @@
 	</div>
 	<div class="container">
 		<div class="row">
-		<div class="row">
 			<div id="box-left" class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 			<div class="block block-layered-nav">
 				<div class="block-title">
@@ -191,6 +190,10 @@
 				<div class="page-title category-title">
 					@if(isset($search))
 						<strong><span>Kết quả tìm kiếm: "{{$search}}"</span></strong>
+						<br>
+						@if(isset($message))
+							<strong><span>{{$message}}</span></strong>
+						@endif
 					@elseif($types->count() > 1)
 						<strong><span>Tất cả sản phẩm</span></strong>
 					@else
@@ -289,7 +292,8 @@
 														</span>
 														</div>
 													</div>
-													<a title="Add to cart" class="btn-cart"><span>Add to Cart</span></a>
+													<a title="Add to cart" class="btn-cart" id="btn-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Add to Cart</span></a>
+													<a title="Add to cart" class="btn-cart" id="btn-delete-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Delete Cart</span></a>
 												</div>
 												</div>
 											</div>
@@ -334,7 +338,7 @@
 													@if(isset($page))
 														@if($i == $page) class="selected" @endif>{{$i}}</a></li>
 													@else
-														@if($i == 5) @endif>{{$i}}</a></li>
+														@if($i == 5) class="selected" @endif>{{$i}}</a></li>
 													@endif
 											@endfor
 										</ul>
@@ -349,7 +353,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
 	</div>		
 </div>
+
 @endsection
