@@ -259,14 +259,14 @@
 										<div class="inner-item ">
 											<div class="item-image">
 												<div class="inner"> 
-												<a class="product-image no-touch" href="detail.html" title="{{$product->name}}">  
+												<a class="product-image no-touch" href="{{route('detail',$product->id)}}" title="{{$product->name}}">  
 												<img class="first_image" src="{{URL::asset('images/product/small/'.$product->image)}}" alt="{{$product->name}}" /> 
 												</a>                
 												</div>
 											</div>
 											<div class="product-shop">
 												<div class="inner">
-												<h2 class="product-name"><a class="product-image" href="detail.html" title="{{$product->name}}"></a>{{$product->name}}</h2>
+												<h2 class="product-name"><a class="product-image" href="{{route('detail',$product->id)}}" title="{{$product->name}}"></a>{{$product->name}}</h2>
 												<div class="price-box">
 													<span class="regular-price" id="product-price-12">
 													<span class="price"><?= number_format($product->price)?> VNĐ</span>                                    
@@ -292,8 +292,7 @@
 														</span>
 														</div>
 													</div>
-													<a title="Add to cart" class="btn-cart" id="btn-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Add to Cart</span></a>
-													<a title="Add to cart" class="btn-cart" id="btn-delete-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Delete Cart</span></a>
+													<a title="Add to cart" class="btn-cart" id="btn-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Thêm vào giỏ</span></a>
 												</div>
 												</div>
 											</div>

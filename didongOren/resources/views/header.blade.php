@@ -514,38 +514,44 @@
                             <div class="box-cart">
                                 <div class="cart-mini">
                                     <div class="title">
-                                        <span class="item">0</span>
+                                        <span class="item">{{Session::get('total')}}</span>
                                     </div>
                                     <div class="block-content">
                                         <div class="inner">
-                                            <p class="block-subtitle">Recently added item(s)</p>
+                                            @if(Session::has('cart'))
+                                            <p class="block-subtitle">Sản phẩm mới được thêm</p>
                                             <ol id="cart-sidebar" class="mini-products-list">
-                                                <li class="item">
-                                                    <a href="#" title="Fashion Product 09" class="product-image">
-                                                    <img src="{{URL::asset('images/product/small/image-demo-1.jpg')}}" alt="Fashion Product 09" />
-                                                    </a>
-                                                    <a href="#" class="btn-remove">Remove This Item</a>
-                                                    <a href="#" title="Edit item" class="btn-edit">Edit item</a>
-                                                    <div class="product-details">
-                                                        <p class="product-name"><a title="Fashion Product 09" href="#">Fashion Product 09</a></p>
-                                                        <span class="price">$200.00</span>       
-                                                        <div class="qty-abc">
-                                                            <a title="Decrement" class="qty-change-left" href="#">down</a>
-                                                            <input class="input-text qty" type="text" value="1" />
-                                                            <a title="Increment" class="qty-change-right" href="#">up</a>
+                                                @foreach(Session::get('cart') as $id => $info)
+                                                    <li class="item">
+                                                        <a href="{{route('detail',$id)}}" title="{{$info['product']->name}}" class="product-image">
+                                                        <img src="{{URL::asset('images/product/small/'.$info['product']->image)}}" alt="{{$info['product']->name}}" width="60" height="60"/>
+                                                        </a>
+                                                        <a href="#" class="btn-remove">Remove This Item</a>
+                                                        <a href="#" title="Edit item" class="btn-edit">Edit item</a>
+                                                        <div class="product-details">
+                                                            <p class="product-name"><a title="{{$info['product']->name}}" href="{{route('detail',$id)}}">{{$info['product']->name}}</a></p>
+                                                            <span class="price"><?= number_format($info['product']->price) ?> VNĐ</span>       
+                                                            <div class="qty-abc">
+                                                                <a title="Decrement" class="qty-change-left" href="#" data-id-decrement-header="{{$id}}">down</a>
+                                                                <input class="input-text qty-header" type="text" value="{{$info['quantity']}}" data-id-input-header="{{$id}}"/>
+                                                                <a title="Increment" class="qty-change-right" href="#" data-id-increment-header="{{$id}}">up</a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
+                                                @endforeach
                                             </ol>
                                             <div class="summary">
                                                 <p class="subtotal">
-                                                    <span class="label">Subtotal:</span> <span class="price">$200.00</span>                                                                        
+                                                    <span class="label">Tổng cộng: </span> <span class="price"><?= number_format(Session::get('total_price')); ?> VNĐ</span>                                                                        
                                                 </p>
                                             </div>
+                                            @else
+                                                <p class="block-subtitle">Không có sản phẩm nào</p> 
+                                            @endif
                                             <div class="actions">
                                                 <div class="a-inner">
-                                                    <a class="btn-mycart" href="#" title="View my cart">view my cart</a>
-                                                    <a href="" title="Checkout" class="btn-checkout">Checkout</a>
+                                                    <a class="btn-mycart" href="{{route('cart')}}" title="View my cart">Giỏ hàng </a>
+                                                    <a href="{{route('getCheckout')}}" title="Checkout" class="btn-checkout">Thanh toán</a>
                                                 </div>
                                             </div>
                                         </div>

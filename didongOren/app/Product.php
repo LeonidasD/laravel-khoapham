@@ -14,6 +14,6 @@ class Product extends Model
         return $this->belongsTo('App\ProductBrand','id_brand','id');
     }
     function ProductType(){
-        return $this->belongsTo('App\Product','id_type','id');
+        return $this->belongsTo('App\ProductType','id_type','id');
     }
 }

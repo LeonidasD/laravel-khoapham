@@ -9,6 +9,7 @@
 		@yield('script')
 		<title>@yield('title')</title>
 	</head>
+	@yield('style')
 	<body class=@yield('class')>
 		<!--begin header-->
 		@include('header')
@@ -19,5 +20,6 @@
 		<!--begin footer-->
 		@include('footer')
 		<!--end footer-->
+		@yield('cart')
 	</body>
 </html>

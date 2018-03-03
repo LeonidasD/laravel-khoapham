@@ -117,46 +117,52 @@
                     </div>
                     <div id="main" class="col-lg-9 col-md-9 col-sm-8 col-xs-12 col-main">
                             <div class="product-name">
-                                <h1>Giỏ hàng</h1>
+                                <h1>Thông tin thanh toán</h1>
                             <div>
-                            <form action="{{route('updateCart')}}" method="GET">
-                                <button type="submit" class="btn btn-default btn-primary">Cập nhật</button>
-                                <a href="{{route('getCheckout')}}" class="btn btn-default btn-primary btn-success">Thanh toán</a>
-                                <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Mã sản phẩm</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Hình ảnh</th>
-                                                <th>Giá</th>
-                                                <th>Khuyến mãi</th>
-                                                <th>Chi tiết khuyến mãi</th>
-                                                <th>Số lượng</th>
-                                                <th>Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>                 
-                                            @foreach(Session::get('cart') as $id => $info)
-                                                <tr>
-                                                    <td>{{$id}}</td>
-                                                        <td>{{$info['product']->name}}</td>
-                                                        <td><img class="first_image" src="{{URL::asset('images/product/small/'.$info['product']->image)}}" alt="{{$info['product']->name}}" width="120" height="120"/> </td>
-                                                        <td><?= number_format($info['product']->price)?>VNĐ</td>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @foreach(Session::get('cart') as $id => $info)
+                                        <a href="{{route('detail',$id)}}" title="{{$info['product']->name}}" class="product-image">
+                                        <img src="{{URL::asset('images/product/small/'.$info['product']->image)}}" alt="{{$info['product']->name}}" width="60" height="60"/>
+                                        </a>
+                                        <div class="product-details">
+                                            <p class="product-name"><a title="{{$info['product']->name}}" href="{{route('detail',$id)}}">Tên sản phẩm: {{$info['product']->name}}</a></p>
+                                            <div class="qty">
+                                                <p>Số lượng: {{$info['quantity']}}</p>
+                                            </div>
+                                            <span class="price">Giá: <?= number_format($info['product']->price)?> VNĐ</span>       
 
-                                                        @if($info['product']->is_promotion == 1)
-                                                            <td>Có</td>
-                                                            <td>{{$info['product']->promotion_description}}</td>
-                                                        @else
-                                                            <td>Không</td>
-                                                            <td></td>
-                                                        @endif
-                                                    <td><input name="qty[{{$id}}]" type="number" value="{{$info['quantity']}}" min="1"/></td>
-                                                    <td><a title="Xoá sản phẩm" class="btn-delete-cart btn btn-danger" id="btn-delete-cart" data-toggle="modal" data-id="{{$info['product']->id}}" data-name="{{$info['product']->name}}"><span>Xoá</span></a></td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                </table>
-                            </form>                    
+                                        </div>
+                                        <hr>
+                                    @endforeach
+                                    <p>Tổng cộng: <?= number_format(Session::get('total_price'));?> VNĐ
+                                </div>
+                                <div class="col-md-6">
+                                    <form action="{{route('checkout')}}" method="GET">
+                                        <div class="form-group">
+                                            <label for="name">Họ tên</label>
+                                            <input class="form-control" type="text" id="name" name="name" placeholder="Họ tên của bạn">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Địa chỉ giao hàng</label>
+                                            <input class="form-control" type="text" id="address" name="address" placeholder="Địa chỉ của bạn">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Số điện thoại</label>
+                                            <input class="form-control" type="text" id="phone" name="phone" placeholder="Số điện thoại của bạn">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ten">Email</label>
+                                            <input class="form-control" type="text" id="email" name="email" placeholder="Email của bạn">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="note">Ghi chú</label>
+                                            <textarea class="form-control" type="text" id="note" name="note" placeholder="Ghi chú đơn hàng"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-default btn-success">Hoàn tất</button>
+                                    </form>
+                                </div>
+                            </div>                 
                     </div>
                     </div>
                     </div>
@@ -308,6 +314,22 @@
             </div>
         </div>
 </div>
+<div class="modal fade" id="deleteCartItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="cart_item"></span>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-done">Đồng ý</button>
+                </div>
+            </div>
+        </div>
+</div>
 <script>
 $('.btn-delete-cart').click(function(){
     var product_id = $(this).attr('data-id');
@@ -328,21 +350,18 @@ $('.btn-confirm-delete').click(function(){
         },
         type: "GET",
         success: function(data){
+            $('.cart_item').html('Đã xoá khỏi giỏ hàng sản phẩm ' + product_name);
             $('#deleteAsk').modal('hide');
             $('#addToCartModal').modal('hide');
-            var total = parseInt($.trim(data));
-            if(!isNaN(total)){
-                $("div.cart-mini > div > span").html(total);
-                //Note, load automatically replaces content. Be sure to include a space before the id selector.
-                $('.table').load(document.URL +  ' .table');
-                $('.account-and-cart').load(document.URL +  ' .account-and-cart');
-                
-            }
+            $('#deleteCartItemModal').modal('show');
         },
         error: function(error){
             alert(error.responseText);
         }
     })
+})
+$('.btn-done').click(function(){
+    window.location.reload();
 })
 </script>
 @endsection

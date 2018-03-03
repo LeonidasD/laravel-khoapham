@@ -13,6 +13,7 @@ class HomeController extends Controller
     function __construct(){
     }
     function getHome(){
+        
         $products = Product::orderBy('id','DESC')->limit(5)->get();
         $brands = ProductBrand::with('Product')->get();
         $types = ProductType::get();

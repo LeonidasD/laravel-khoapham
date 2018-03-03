@@ -11,6 +11,7 @@ class ProductType extends Model
     public $timestamps = false;
 
     function Product(){
+        //foreign key của PT trong P
         return $this->hasMany('App\Product','id_type','id');
     }
     function ProductBrand(){

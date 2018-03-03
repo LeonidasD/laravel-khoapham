@@ -234,61 +234,65 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="deleteCartItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="exampleModalLabel">Thông báo</h4>
-            </div>
-            <div class="modal-body">
-                <span class="cart_item">...</span>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Đồng ý</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <script>
 $('.btn-cart').click(function(){
     var product_id = $(this).attr('data-id');
     var product_name = $(this).attr('data-name');
-    $.ajax({
-        url: "{{route('addToCart')}}",
-        data: {
-            id: product_id
-        },
-        type: "GET",
-        success: function(data){
-            $('.cart_item').html('Đã thêm vào giỏ hàng sản phẩm ' + product_name);
-            $('#deleteCartItemModal').modal('hide');
-            $('#addToCartModal').modal('show');
-        },
-        error: function(error){
-            alert(error.responseText);
-        }
-    })
+    var qty = parseInt($('.qty').val());
+    if(!isNaN(qty)){
+        $.ajax({
+            url: "{{route('addToCart')}}",
+            data: {
+                id: product_id,
+                qty: qty
+            },
+            type: "GET",
+            success: function(data){
+                $('.cart_item').html('Đã thêm vào giỏ hàng sản phẩm ' + product_name);
+
+                $('#deleteCartItemModal').modal('hide');
+                $('#addToCartModal').modal('show');
+                var total = parseInt($.trim(data));
+                if(!isNaN(total)){
+                    $("div.cart-mini > div > span").html(total);
+                    //Note, load automatically replaces content. Be sure to include a space before the id selector.
+                    $('.account-and-cart').load(document.URL +  ' .account-and-cart');
+                }
+            },
+            error: function(error){
+                alert(error.responseText);
+            }
+        })
+    }
+    else{
+        $.ajax({
+            url: "{{route('addToCart')}}",
+            data: {
+                id: product_id
+            },
+            type: "GET",
+            success: function(data){
+                $('.cart_item').html('Đã thêm vào giỏ hàng sản phẩm ' + product_name);
+
+                $('#deleteCartItemModal').modal('hide');
+                $('#addToCartModal').modal('show');
+                var total = parseInt($.trim(data));
+                if(!isNaN(total)){
+                    $("div.cart-mini > div > span").html(total);
+                    //Note, load automatically replaces content. Be sure to include a space before the id selector.
+                    $('.account-and-cart').load(document.URL +  ' .account-and-cart');
+                }
+            },
+            error: function(error){
+                alert(error.responseText);
+            }
+        })
+    }
 })
 
-$('.btn-delete-cart').click(function(){
-    var product_id = $(this).attr('data-id');
-    var product_name = $(this).attr('data-name');
-    $.ajax({
-        url: "route('deleteFromCart')}}",
-        data: {
-            id: product_id
-        },
-        type: "GET",
-        sucesss: function(data){
-            $('.cart-item').html('Đã xoá khỏi giỏ hàng sản phẩm ' + product_name);
-            $('#deleteCartItemModal').modal('show');
-            $('#addToCartModal').modal('hide');
-        },
-        error: function(error){
-            alert(error.responseText);
-        }
-    }) 
+$('.qty-change-left').click(function(){
+    var product_id = $('.qty-header').attr('data-id-decrement-header');
 })
 </script>
+

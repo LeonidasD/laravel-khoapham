@@ -12,7 +12,6 @@ class ListController extends Controller
     //
 
     function getProducts(Request $req){
-        // dd(Session::get('cart'));
         $id = $req->id;
         $page = (isset($req->page)) ? $req->page : 5;
         $products = ($id == 0) ? Product::with('ProductType')->paginate($page) : Product::with('ProductType')->where('id_type',$id)->paginate($page);

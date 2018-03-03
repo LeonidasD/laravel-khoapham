@@ -47,3 +47,21 @@ Route::get('addToCart',[
    'uses'  => 'CartController@addToCart',
    'as' => 'addToCart'
 ]);
+Route::get('updateCart',[
+    'uses' => 'CartController@updateCart',
+    'as' => 'updateCart'
+]);
+Route::get('deleteCartItem',[
+    'uses' => 'CartController@deleteCartItem',
+    'as' => 'deleteCart'
+]);
+
+// Checkout Controller //
+Route::get('checkout',[
+    'uses' => 'CheckoutController@getCheckoutForm',
+    'as' => 'getCheckout'
+]);
+Route::get('finish',[
+    'uses' => 'CheckoutController@finishCheckout',
+    'as' => 'checkout'
+]);

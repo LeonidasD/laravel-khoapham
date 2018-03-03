@@ -214,7 +214,7 @@
 								<div class="short-description">
 									<div class="std"><span>
 									{{$product->description}}</span>
-									</div>
+								</div>
 								<div class="box-info-detail">
 									<p class="availability in-stock">
 										<span class="label">Availability:</span>
@@ -233,7 +233,7 @@
 										</div>
 									</div>
 									<div class="product-options-bottom">
-										<div class="custom-option color">
+										{{--  <div class="custom-option color">
 										<label for="qty">Color</label>
 										<ul>
 										<li add="$1.500.00"><span style="background-color:#ffffff;border:1px solid #eaeaea;">color1</span></li>
@@ -243,17 +243,14 @@
 										<li add="$1.900.00 "><span style="background-color:#ff6766">color5</span></li>
 										<li add="$2.000.00 "><span style="background-color:#ea956e">color5</span></li>
 										</ul>
-										</div>
-										<div class="custom-option size">
-										<label for="qty">Size</label>
-										<ul>
-										<li add="$2.000.00"><span>S</span></li>
-										<li add="$1.500.00"><span>X</span></li>
-										<li add="$1.600.00"><span>M</span></li>
-										<li add="$1.700.00"><span>L</span></li>
-										<li add="$1.800.00"><span>XL</span></li>
-										<li add="$1.900.00"><span>XXL</span></li>
-										</ul>
+										</div>  --}}
+										<strong>Thông số kỹ thuật</strong>
+										<div>
+											<ul class="dec">
+												@foreach($product->specification as $specs)
+													<li><span>{{$specs}}</span><li>
+												@endforeach
+											</ul>
 										</div>
 										<div class="add-to-box add-to-cart">
 											<div class="add-to-cart">
@@ -262,7 +259,8 @@
 													<input type="text" pattern="\d*" name="qty" id="qty" maxlength="12" value="1" title="Qty" class="input-text qty" />
 												</div>
 												<div class="add-to-cart-buttons">
-													<button type="button" title="Add to Cart" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span>Add to Cart</span></span></button>
+													<button type="button" title="Add to cart" class="btn-cart" id="btn-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Thêm vào giỏ</span></button>
+
 												</div>
 											</div>
 											<!--<span class="or"></span>-->
@@ -297,8 +295,8 @@
 					</div>
 				<div class="tab-detail">
 					<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#home">Description</a></li>
-					<li><a data-toggle="tab" href="#menu1">Additional Info</a></li>
+					<li class="active"><a data-toggle="tab" href="#home">Mô tả</a></li>
+					<li><a data-toggle="tab" href="#menu1">Thông tin thêm</a></li>
 					<li><a data-toggle="tab" href="#menu2">Review</a></li>
 					<li><a data-toggle="tab" href="#menu3">Tags</a></li>
 					<li><a data-toggle="tab" href="#menu4">Custom tab 1</a></li>
@@ -306,13 +304,7 @@
 	
 					<div class="tab-content">
 					<div id="home" class="tab-pane fade in active">
-						<p>A Grouped Product lets you offer multiple, standalone products for sale as a group on the same Product Detail page. You can offer variations of a single product, or group them by season or theme to create a coordinated set. Products can be purchased separately, or as part of the group. Each product purchased appears in the Shopping Cart as a separate item.</p>
-						<p>The Product Detail page of a Grouped Product displays the image and description from the Grouped Product record, and lists the name of each associated product with the price, and input box for the quantity ordered.</p>
-						<ul class="dec">
-						<li>Phasellus nulla massa, malesuada sed pulvinar</li>
-						<li>Lorem ipsum dolor sit amet</li>
-						<li>Maecenas doneton nec mauris magna</li>
-						</ul>
+						<p>{{$product->summary}}</p>
 					</div>
 					<div id="menu1" class="tab-pane fade">
 						<h3>Additional Information</h3>
