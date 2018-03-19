@@ -14,6 +14,6 @@ class DetailController extends Controller
         // dd($product->specification);
         $relatedType = $product->id;
         $relatedProduct = Product::where('id_type',$relatedType)->get();
-        return view('pages.detail',compact('product','relatedProduct'));
+        return view('client.pages.detail',compact('product','relatedProduct'));
     }
 }

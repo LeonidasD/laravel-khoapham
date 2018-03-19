@@ -11,8 +11,10 @@ class CartController extends Controller
 {
     //
     function addToCart(Request $req){
+        ob_end_clean();
         $product_id = $req->id;
-
+        $product_image = $req->img;
+        $product = null;
         $cart = Session::get('cart');  
         if(Session::has('total_price'))
             $total_price = Session::get('total_price');
@@ -31,6 +33,9 @@ class CartController extends Controller
             //total price += price * (currentQty - cartQty)
             $total_price = $total_price + $cart[$product_id]['product']->price * ($currentQty-$cart[$product_id]['quantity']);
             $cart[$product_id]['quantity'] = $currentQty;
+            ob_start();
+            echo "<span class='current-qty' data-id='$product_id'>".$currentQty."</span>";
+            echo "<span class='summary'>".number_format($total_price)." VNĐ</span>";
         }
         else{
             // create new Product
@@ -42,12 +47,43 @@ class CartController extends Controller
             $product_info = ['product'=> $product,'quantity' => $currentQty];
             $cart[$product_id] = $product_info;
             $total_price = $total_price + $cart[$product_id]['product']->price * $currentQty;
+            ob_start();
+            echo "<span class='item'>";
+            echo "<li class='item'>";
+            echo "<a href='detail/$product->id' title='$product->name' class='product-image'>";
+            echo "<img src='$product_image' alt='$product->name' width='60' height='60'/>";
+            echo "</a>";
+            echo "<a href='#' class='btn-remove'>Remove This Item</a>";
+            echo "<a href='#' title='Edit item' class='btn-edit'>Edit item</a>";
+            echo "<div class='product-details'>";
+            echo "<p class='product-name'><a title='$product->name' href='route(detail,$product->id)'>$product->name</a></p>";
+            echo "<span class='price'>". number_format($product->price). " VNĐ</span>";
+            echo "<div class='qty-abc'>";
+            echo "<a title='Decrement' class='qty-change-left' href='#' data-id='$product->id' data-name='$product->name'>down</a>";
+            echo "<input class='input-text qty-header' type='text' value='$currentQty' data-id='$product_id' />";
+            echo "<a title='Increment' class='qty-change-right' href='#' data-id='$product->id' data-name='$product->name' >up</a>";
+            echo "</div>
+                </div>
+            </li>";
+            echo "</span>";
+            echo "<span class='summary'><div class='summary'>
+            <p class='subtotal'>
+                <span class='label'>Tổng cộng: </span> <span class='price'>". number_format($total_price). " VNĐ</span>                                                                        
+            </p></div></span>";
+            echo "<span class='checkout-button'>
+                    <div class='actions'>
+                    <div class='a-inner'>
+                        <a class='btn-mycart' href='$_SERVER[HTTP_HOST]/cart' title='View my cart'>Giỏ hàng </a>
+                        <a href='checkout' title='Checkout' class='btn-checkout'>Thanh toán</a>
+                    </div>
+                </div>
+            </span>";
+            echo "<span class='total-qty'>".count($cart)."</span>";
         }
 
         Session::put('cart',$cart);
         Session::put('total',count($cart));
         Session::put('total_price',$total_price);
-        echo count($currentQty);
     }
     
     function updateCart(Request $req){
@@ -83,13 +119,15 @@ class CartController extends Controller
         Session::put('total',count($cart));
         Session::put('total_price',$total_price);
         echo count($cart);
+        Session::save(); //save after flush to make sure session's completely deleted
     }
 
     function getCart(Request $req){
-        // Session::flush();
+        Session::flush();
         
-        // Session::save(); //save after flush to make sure session's completely deleted
+        Session::save(); //save after flush to make sure session's completely deleted
 
-        return view('pages.cart');
+
+        return view('client.pages.cart');
     }
 }

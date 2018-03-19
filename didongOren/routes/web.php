@@ -65,3 +65,20 @@ Route::get('finish',[
     'uses' => 'CheckoutController@finishCheckout',
     'as' => 'checkout'
 ]);
+
+Route::prefix('admin')->group(function(){
+    Route::get('dashboard',[
+        'uses' => 'AdminController@getDashboard',
+        'as' => 'getDashboard'
+    ]);
+
+    Route::get('productlist',[
+        'uses' => 'AdminController@getProductList',
+        'as' => 'getProductList'
+    ]);
+
+    Route::get('deleteItem',[
+        'uses' => 'AdminController@deteleProduct',
+        'as' => 'deleteItem'
+    ]);
+});

@@ -15,7 +15,7 @@ class CheckoutController extends Controller
     function getCheckoutForm(){
         // dd(Session::get('cart'));
         if(Session::has('cart')){
-            return view('pages.checkout');
+            return view('client.pages.checkout');
         }
     }
 
@@ -27,6 +27,8 @@ class CheckoutController extends Controller
             $bill_detail = new BillDetail;
             $bill_detail->id = $detail_id;
             $bill_detail->id_product = $id;
+            $product = Product::where('id',$id)->first();
+            $product->quantity -= $info['quantity'];
             $bill_detail->quantity = $info['quantity'];
             $bill_detail->save();
         }
@@ -43,7 +45,5 @@ class CheckoutController extends Controller
         $bill->note = $req->note;
         $bill->status = 0;
         $bill->save();
-
-
     }
 }

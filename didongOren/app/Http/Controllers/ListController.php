@@ -16,7 +16,7 @@ class ListController extends Controller
         $page = (isset($req->page)) ? $req->page : 5;
         $products = ($id == 0) ? Product::with('ProductType')->paginate($page) : Product::with('ProductType')->where('id_type',$id)->paginate($page);
         $types = ($id == 0) ? ProductType::with('Product','ProductBrand.Product')->get() : ProductType::with('Product', 'ProductBrand.Product')->where('id',$id)->get();
-        return view('pages.list',compact('products','types','id','page'));
+        return view('client.pages.list',compact('products','types','id','page'));
     }
 
     function getSearchResult(Request $req){
@@ -26,8 +26,8 @@ class ListController extends Controller
         $types = ProductType::with('Product','ProductBrand.Product')->get();
         if($products->count() < 1){
             $message = "Không tìm thấy sản phẩm có từ khoá '$search'";
-            return view('pages.list',compact('products','types','search','message','page'));
+            return view('client.pages.list',compact('products','types','search','message','page'));
         }
-        return view('pages.list',compact('products','types','search','page'));
+        return view('client.pages.list',compact('products','types','search','page'));
     }
 }
