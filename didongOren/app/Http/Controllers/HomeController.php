@@ -14,7 +14,7 @@ class HomeController extends Controller
     }
     function getHome(){
         
-        $products = Product::orderBy('id','DESC')->limit(5)->get();
+        $products = Product::where('on_sale',1)->orderBy('id','DESC')->limit(5)->get();
         $brands = ProductBrand::with('Product')->get();
         $types = ProductType::get();
         return view('client.pages.home',compact('products','brands','types'));

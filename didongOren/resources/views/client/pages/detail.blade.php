@@ -246,11 +246,11 @@
 										</div>  --}}
 										<strong>Thông số kỹ thuật</strong>
 										<div>
-											<ul class="dec">
+											<ol class="dec">
 												@foreach($product->specification as $specs)
-													<li><span>{{$specs}}</span><li>
+													<li>{{$specs}}</li>
 												@endforeach
-											</ul>
+											</ol>
 										</div>
 										<div class="add-to-box add-to-cart">
 											<div class="add-to-cart">

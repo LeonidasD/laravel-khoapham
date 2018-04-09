@@ -153,7 +153,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="ten">Email</label>
-                                            <input class="form-control" type="text" id="email" name="email" placeholder="Email của bạn">
+                                            <input class="form-control" type="email" id="email" name="email" placeholder="Email của bạn">
                                         </div>
                                         <div class="form-group">
                                             <label for="note">Ghi chú</label>

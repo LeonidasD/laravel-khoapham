@@ -137,7 +137,7 @@
                                         </thead>
                                         <tbody>                 
                                             @foreach(Session::get('cart') as $id => $info)
-                                                <tr>
+                                                <tr id="product-{{$id}}">
                                                     <td>{{$id}}</td>
                                                         <td>{{$info['product']->name}}</td>
                                                         <td><img class="first_image" src="{{URL::asset('images/product/small/'.$info['product']->image)}}" alt="{{$info['product']->name}}" width="120" height="120"/> </td>

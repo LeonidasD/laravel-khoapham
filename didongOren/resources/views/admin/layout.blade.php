@@ -1,124 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>Droopy I Fast build Admin dashboard for any platform</title>
-	<meta name="description" content="Droopy is a Dashboard & Admin Site Responsive Template by hencework." />
-	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Droopy Admin, Droopyadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
-	<meta name="author" content="hencework"/>
-	
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	
-	<!-- Data table CSS -->
-	<link href="{{URL::asset('admin/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
-	
-	<!-- Toast CSS -->
-	<link href="{{URL::asset('admin/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css')}}" rel="stylesheet" type="text/css">
-	
-	<!-- Custom CSS -->
-	<link href="{{URL::asset('admin/dist/css/style-dark.css')}}" rel="stylesheet" type="text/css">
-	
-	{{--  Bootstrap  --}}
-	<link href="{{URL::asset('admin/vendors/bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-</head>
+	<head>
+		<title>Material Admin - Dashboard</title>
 
-<body>
-	<!--Preloader-->
-	<div class="preloader-it">
-		<div class="la-anim-1"></div>
-	</div>
-	<!--/Preloader-->
-    <div class="wrapper  theme-1-active pimary-color-green">
-		<!-- Top Menu Items -->
-			@include('admin.menu.topmenu')
-		<!-- /Top Menu Items -->
-		
-		<!-- Left Sidebar Menu -->
-			@include('admin.menu.leftsidebarmenu')
-		<!-- /Left Sidebar Menu -->
-		
-		<!-- Right Sidebar Menu -->
-			@include('admin.menu.rightsidebarmenu')
-		<!-- /Right Sidebar Menu -->
-		
-		
-		
-		<!-- Right Sidebar Backdrop -->
-			@include('admin.menu.rightsidebarbackdrop')
-		<!-- /Right Sidebar Backdrop -->
+		<!-- BEGIN META -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="keywords" content="your,keywords">
+		<meta name="description" content="Short explanation about this website">
+		<!-- END META -->
 
-        <!-- Main Content -->
-			@yield('content')
-		<!-- /Main Content -->
+		<!-- BEGIN STYLESHEETS -->
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
+		<link type="text/css" rel="stylesheet" href="{{URL::asset('admin/assets/css/theme-default/bootstrap.css?1422792965')}}" />
+		<link type="text/css" rel="stylesheet" href="{{URL::asset('admin/assets/css/theme-default/materialadmin.css?1425466319')}}" />
+		<link type="text/css" rel="stylesheet" href="{{URL::asset('admin/assets/css/theme-default/font-awesome.min.css?1422529194')}}" />
+		<link type="text/css" rel="stylesheet" href="{{URL::asset('admin/assets/css/theme-default/material-design-iconic-font.min.css?1421434286')}}" />
+		<link type="text/css" rel="stylesheet" href="{{URL::asset('admin/assets/css/theme-default/libs/rickshaw/rickshaw.css?1422792967')}}" />
+		<link type="text/css" rel="stylesheet" href="{{URL::asset('admin/assets/css/theme-default/libs/morris/morris.core.css?1420463396')}}" />
+		<!-- END STYLESHEETS -->
+		<script src="{{URL::asset('admin/ckeditor/ckeditor.js')}}"></script>
+		<script src="{{URL::asset('admin/ckfinder/ckfinder.js')}}"></script>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
+		<script type="text/javascript" src="../../assets/js/libs/utils/respond.min.js?1403934956"></script>
+		<![endif]-->
+	</head>
+	<body class="menubar-hoverable header-fixed ">
 
-		
+        <!-- BEGIN HEADER-->
+            @include('admin.header')
+		<!-- END HEADER-->
 
-    </div>
-    <!-- /#wrapper -->
-	
-	<!-- JavaScript -->
-	
-    <!-- jQuery -->
-    <script src="{{URL::asset('admin/vendors/bower_components/jquery/dist/jquery.min.js')}}"></script>
+		<!-- BEGIN BASE-->
+		<div id="base">
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{URL::asset('admin/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    
-	<!-- Counter Animation JavaScript -->
-	<script src="{{URL::asset('admin/vendors/bower_components/waypoints/lib/jquery.waypoints.min.js')}}"></script>
-	<script src="{{URL::asset('admin/vendors/bower_components/jquery.counterup/jquery.counterup.min.js')}}"></script>
-	
-	<!-- Data table JavaScript -->
-	<script src="{{URL::asset('admin/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-	<script src="{{URL::asset('admin/dist/js/productorders-data.js')}}"></script>
-	
-	<!-- Owl JavaScript -->
-	<script src="{{URL::asset('admin/vendors/bower_components/owl.carousel/dist/owl.carousel.min.js')}}"></script>
-	
-	<!-- Switchery JavaScript -->
-	<script src="{{URL::asset('admin/vendors/bower_components/switchery/dist/switchery.min.js')}}"></script>
-	
-	<!-- Slimscroll JavaScript -->
-	<script src="{{URL::asset('admin/dist/js/jquery.slimscroll.js')}}"></script>
-	
-	<!-- Fancy Dropdown JS -->
-	<script src="{{URL::asset('admin/dist/js/dropdown-bootstrap-extended.js')}}"></script>
-	
-	<!-- Sparkline JavaScript -->
-	<script src="{{URL::asset('admin/vendors/jquery.sparkline/dist/jquery.sparkline.min.js')}}"></script>
-	
-	<!-- EChartJS JavaScript -->
-	<script src="{{URL::asset('admin/vendors/bower_components/echarts/dist/echarts-en.min.js')}}"></script>
-	<script src="{{URL::asset('admin/vendors/echarts-liquidfill.min.js')}}"></script>
-	
-	<!-- Toast JavaScript -->
-	<script src="{{URL::asset('admin/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
-	
-	<!-- Init JavaScript -->
-	<script src="{{URL::asset('admin/dist/js/init.js')}}"></script>
-	<script src="{{URL::asset('admin/dist/js/dashboard3-data.js')}}"></script>
+			<!-- BEGIN OFFCANVAS LEFT -->
+			<div class="offcanvas">
+			</div><!--end .offcanvas-->
+			<!-- END OFFCANVAS LEFT -->
 
+			<!-- BEGIN CONTENT-->
+                @yield('content')
+			<!-- END CONTENT -->
 
-	@yield('modal')
-	<div class="modal" id="deleteAsk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="exampleModalLabel">Thông báo</h4>
+			<!-- BEGIN MENUBAR-->
+                @include('admin.navigator.menubar')
+			<!-- END MENUBAR -->
+
+			<!-- BEGIN OFFCANVAS RIGHT -->
+			<div class="offcanvas">
+
+				<!-- BEGIN OFFCANVAS SEARCH -->
+				<div id="offcanvas-search" class="offcanvas-pane width-8">
+					<div class="offcanvas-head">
+						<header class="text-primary">Search</header>
+						<div class="offcanvas-tools">
+							<a class="btn btn-icon-toggle btn-default-light pull-right" data-dismiss="offcanvas">
+								<i class="md md-close"></i>
+							</a>
+						</div>
 					</div>
-					<div class="modal-body">
-						<span class="delete_question"></span>
+					<div class="offcanvas-body no-padding">
+						<ul class="list ">
+							<li class="tile divider-full-bleed">
+								<div class="tile-content">
+									<div class="tile-text"><strong>A</strong></div>
+								</div>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar4.jpg?1404026791" alt="" />
+									</div>
+									<div class="tile-text">
+										Alex Nelson
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar9.jpg?1404026744" alt="" />
+									</div>
+									<div class="tile-text">
+										Ann Laurens
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile divider-full-bleed">
+								<div class="tile-content">
+									<div class="tile-text"><strong>J</strong></div>
+								</div>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar2.jpg?1404026449" alt="" />
+									</div>
+									<div class="tile-text">
+										Jessica Cruise
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar8.jpg?1404026729" alt="" />
+									</div>
+									<div class="tile-text">
+										Jim Peters
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile divider-full-bleed">
+								<div class="tile-content">
+									<div class="tile-text"><strong>M</strong></div>
+								</div>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar5.jpg?1404026513" alt="" />
+									</div>
+									<div class="tile-text">
+										Mabel Logan
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar11.jpg?1404026774" alt="" />
+									</div>
+									<div class="tile-text">
+										Mary Peterson
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar3.jpg?1404026799" alt="" />
+									</div>
+									<div class="tile-text">
+										Mike Alba
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile divider-full-bleed">
+								<div class="tile-content">
+									<div class="tile-text"><strong>N</strong></div>
+								</div>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar6.jpg?1404026572" alt="" />
+									</div>
+									<div class="tile-text">
+										Nathan Peterson
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile divider-full-bleed">
+								<div class="tile-content">
+									<div class="tile-text"><strong>P</strong></div>
+								</div>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar7.jpg?1404026721" alt="" />
+									</div>
+									<div class="tile-text">
+										Philip Ericsson
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+							<li class="tile divider-full-bleed">
+								<div class="tile-content">
+									<div class="tile-text"><strong>S</strong></div>
+								</div>
+							</li>
+							<li class="tile">
+								<a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+									<div class="tile-icon">
+										<img src="../../assets/img/avatar10.jpg?1404026762" alt="" />
+									</div>
+									<div class="tile-text">
+										Samuel Parsons
+										<small>123-123-3210</small>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div><!--end .offcanvas-body -->
+				</div><!--end .offcanvas-pane -->
+				<!-- END OFFCANVAS SEARCH -->
+
+				<!-- BEGIN OFFCANVAS CHAT -->
+				<div id="offcanvas-chat" class="offcanvas-pane style-default-light width-12">
+					<div class="offcanvas-head style-default-bright">
+						<header class="text-primary">Chat with Ann Laurens</header>
+						<div class="offcanvas-tools">
+							<a class="btn btn-icon-toggle btn-default-light pull-right" data-dismiss="offcanvas">
+								<i class="md md-close"></i>
+							</a>
+							<a class="btn btn-icon-toggle btn-default-light pull-right" href="#offcanvas-search" data-toggle="offcanvas" data-backdrop="false">
+								<i class="md md-arrow-back"></i>
+							</a>
+						</div>
+						<form class="form">
+							<div class="form-group floating-label">
+								<textarea name="sidebarChatMessage" id="sidebarChatMessage" class="form-control autosize" rows="1"></textarea>
+								<label for="sidebarChatMessage">Leave a message</label>
+							</div>
+						</form>
 					</div>
-					<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-confirm-delete">Đồng ý</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
-					</div>
-				</div>
-			</div>
-	</div>
-</body>
+					<div class="offcanvas-body">
+						<ul class="list-chats">
+							<li>
+								<div class="chat">
+									<div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" /></div>
+									<div class="chat-body">
+										Yes, it is indeed very beautiful.
+										<small>10:03 pm</small>
+									</div>
+								</div><!--end .chat -->
+							</li>
+							<li class="chat-left">
+								<div class="chat">
+									<div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar9.jpg?1404026744" alt="" /></div>
+									<div class="chat-body">
+										Did you see the changes?
+										<small>10:02 pm</small>
+									</div>
+								</div><!--end .chat -->
+							</li>
+							<li>
+								<div class="chat">
+									<div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" /></div>
+									<div class="chat-body">
+										I just arrived at work, it was quite busy.
+										<small>06:44pm</small>
+									</div>
+									<div class="chat-body">
+										I will take look in a minute.
+										<small>06:45pm</small>
+									</div>
+								</div><!--end .chat -->
+							</li>
+							<li class="chat-left">
+								<div class="chat">
+									<div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar9.jpg?1404026744" alt="" /></div>
+									<div class="chat-body">
+										The colors are much better now.
+									</div>
+									<div class="chat-body">
+										The colors are brighter than before.
+										I have already sent an example.
+										This will make it look sharper.
+										<small>Mon</small>
+									</div>
+								</div><!--end .chat -->
+							</li>
+							<li>
+								<div class="chat">
+									<div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" /></div>
+									<div class="chat-body">
+										Are the colors of the logo already adapted?
+										<small>Last week</small>
+									</div>
+								</div><!--end .chat -->
+							</li>
+						</ul>
+					</div><!--end .offcanvas-body -->
+				</div><!--end .offcanvas-pane -->
+				<!-- END OFFCANVAS CHAT -->
+
+			</div><!--end .offcanvas-->
+			<!-- END OFFCANVAS RIGHT -->
+
+		</div><!--end #base-->
+		<!-- END BASE -->
+
+		<!-- BEGIN JAVASCRIPT -->
+		<script src="{{URL::asset('admin/assets/js/libs/jquery/jquery-1.11.2.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/jquery/jquery-migrate-1.2.1.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/bootstrap/bootstrap.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/spin.js/spin.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/autosize/jquery.autosize.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/moment/moment.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/flot/jquery.flot.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/flot/jquery.flot.time.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/flot/jquery.flot.resize.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/flot/jquery.flot.orderBars.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/flot/jquery.flot.pie.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/flot/curvedLines.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/jquery-knob/jquery.knob.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/sparkline/jquery.sparkline.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/nanoscroller/jquery.nanoscroller.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/d3/d3.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/d3/d3.v3.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/libs/rickshaw/rickshaw.min.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/source/App.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/source/AppNavigation.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/source/AppOffcanvas.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/source/AppCard.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/source/AppForm.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/source/AppNavSearch.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/source/AppVendor.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/demo/Demo.js')}}"></script>
+		<script src="{{URL::asset('admin/assets/js/core/demo/DemoDashboard.js')}}"></script>
+		<script src="{{URL::asset('admin/ckeditor/ckeditor.js')}}"></script>
+		<!-- END JAVASCRIPT -->
+
+		@yield('modal')
+	</body>
 </html>

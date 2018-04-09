@@ -522,11 +522,11 @@
                                             <p class="block-subtitle">Sản phẩm mới được thêm</p>
                                             <ol id="cart-sidebar" class="mini-products-list">
                                                 @foreach(Session::get('cart') as $id => $info)
-                                                    <li class="item">
+                                                    <li class="item" id="product-{{$id}}">
                                                         <a href="{{route('detail',$id)}}" title="{{$info['product']->name}}" class="product-image">
                                                         <img src="{{URL::asset('images/product/small/'.$info['product']->image)}}" alt="{{$info['product']->name}}" width="60" height="60"/>
                                                         </a>
-                                                        <a href="#" class="btn-remove">Remove This Item</a>
+                                                        <a href="#" class="btn-remove" data-id="{{$id}}" data-name="{{$info['product']->name}}" >Remove This Item</a>
                                                         <a href="#" title="Edit item" class="btn-edit">Edit item</a>
                                                         <div class="product-details">
                                                             <p class="product-name"><a title="{{$info['product']->name}}" href="{{route('detail',$id)}}">{{$info['product']->name}}</a></p>

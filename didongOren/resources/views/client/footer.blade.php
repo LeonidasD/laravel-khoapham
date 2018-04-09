@@ -245,8 +245,8 @@
                 <span class="delete_question"></span>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-confirm-delete">Đồng ý</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
+                <button type="button" class="btn btn-primary btn-confirm-delete">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
             </div>
         </div>
     </div>
@@ -256,13 +256,15 @@
 $('.btn-cart, .qty-change-right').click(function(){
     var product_id = $(this).attr('data-id');
     var product_name = $(this).attr('data-name');
+    var product_image = $(this).attr('data-image');
     var qty = parseInt($('.qty').val());
     if(!isNaN(qty)){
         $.ajax({
             url: "{{route('addToCart')}}",
             data: {
                 id: product_id,
-                qty: qty
+                qty: qty,
+                img: product_image
             },
             type: "GET",
             success: function(data){
@@ -272,13 +274,6 @@ $('.btn-cart, .qty-change-right').click(function(){
                 $('#addToCartModal').modal('show');
                  //Create jQuery object from the response HTML.
                 var total = $(data);
-                console.log(total);
-                if(total.hasClass('current-qty')){
-                    alert('456');
-                }
-                else{
-                    alert('4562');
-                }
             },
             error: function(error){
                 alert(error.responseText);
@@ -289,7 +284,8 @@ $('.btn-cart, .qty-change-right').click(function(){
         $.ajax({
             url: "{{route('addToCart')}}",
             data: {
-                id: product_id
+                id: product_id,
+                img: product_image
             },
             type: "GET",
             success: function(data){
@@ -311,15 +307,15 @@ $('.btn-cart, .qty-change-right').click(function(){
                 }
                 else{
                     var item = total.filter('.item').html();
-                    console.log(total);
                     if($('.mini-cart').has('.summary').length){
                         var summary = total.filter('.summary').text();
                         $('div.summary > p.subtotal > span.price').text(summary);
                     }
                     else{
                         var summary = total.filter('.summary').html();
-                        var checkoutBtn = total.filter('.checkout-button').html();
-
+                        var checkoutBtn = total.filter('.checkout-button');
+                        checkoutBtn.find('div > a.btn-checkout').attr('href',"{{route('getCheckout')}}");
+                        checkoutBtn.find('div > a.btn-mycart').attr('href',"{{route('cart')}}");
                         $('.mini-cart').append(summary);
                         $('.mini-cart').append(checkoutBtn);
                     }
@@ -366,10 +362,8 @@ $('.btn-confirm-delete').click(function(){
             if(!isNaN(total)){
                 $("div.cart-mini > div > span").html(total);
                 //Note, load automatically replaces content. Be sure to include a space before the id selector.
-                $('.table').load(document.URL +  ' .table');
-                $('.account-and-cart').load(document.URL +  ' .account-and-cart');
-                
             }
+            $('#product-'+ product_id).hide();
         },
         error: function(error){
             alert(error.responseText);

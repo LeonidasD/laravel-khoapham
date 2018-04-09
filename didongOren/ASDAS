@@ -1,0 +1,1 @@
+Write a C++ function printArray(A, m ,n) that prints an m×n two dimensional array A of integers, declared to be “int** A”, to the standard output. Each of the m rows should appear on separate line

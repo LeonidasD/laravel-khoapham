@@ -67,18 +67,51 @@ Route::get('finish',[
 ]);
 
 Route::prefix('admin')->group(function(){
-    Route::get('dashboard',[
-        'uses' => 'AdminController@getDashboard',
-        'as' => 'getDashboard'
+    Route::post('/login',[
+        'uses' => 'AdminController@PostLogin',
+        'as' => 'postLogin'
     ]);
 
-    Route::get('productlist',[
-        'uses' => 'AdminController@getProductList',
-        'as' => 'getProductList'
+    Route::get('/login',[
+        'uses' => 'AdminController@GetLogin',
+        'as' => 'getLogin'
     ]);
 
-    Route::get('deleteItem',[
-        'uses' => 'AdminController@deteleProduct',
-        'as' => 'deleteItem'
+    Route::get('/logout',[
+        'uses' => 'AdminController@Logout',
+        'as' => 'logout'
     ]);
+
+    Route::post('/register',[
+        'uses' => 'AdminController@PostRegister',
+        'as' => 'postRegister'
+    ]);
+
+    Route::get('/register',[
+        'uses' => 'AdminController@GetRegister',
+        'as' => 'getRegister'
+    ]);
+
+    Route::group(['middleware'=> 'admin'],function(){
+        Route::get('/dashboard',[
+            'uses' => 'AdminController@GetDashboard',
+            'as' => 'getDashboard'
+        ]);
+    
+        Route::get('productlist',[
+            'uses' => 'AdminController@GetProductList',
+            'as' => 'productList'
+        ]);
+    
+        Route::get('addItem',[
+            'uses' => 'AdminController@GetAddProduct',
+            'as' => 'addItem'
+        ]);
+    
+        Route::get('deleteItem',[
+            'uses' => 'AdminController@GetDeteleProduct',
+            'as' => 'deleteItem'
+        ]);
+    });
+    
 });

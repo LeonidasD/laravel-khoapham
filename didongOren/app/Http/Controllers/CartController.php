@@ -73,8 +73,8 @@ class CartController extends Controller
             echo "<span class='checkout-button'>
                     <div class='actions'>
                     <div class='a-inner'>
-                        <a class='btn-mycart' href='$_SERVER[HTTP_HOST]/cart' title='View my cart'>Giỏ hàng </a>
-                        <a href='checkout' title='Checkout' class='btn-checkout'>Thanh toán</a>
+                        <a class='btn-mycart' href='cart' title='View my cart'>Giỏ hàng </a>
+                        <a class='btn-checkout' href='checkout' title='Checkout' >Thanh toán</a>
                     </div>
                 </div>
             </span>";
@@ -115,6 +115,12 @@ class CartController extends Controller
         $total_price = Session::get('total_price');
         $total_price -= $cart[$product_id]['product']->price * $cart[$product_id]['quantity'];
         unset($cart[$product_id]);
+        if(count($cart) <= 0){
+            Session::forget('cart');
+            Session::forget('total');
+            Session::forget('total_price');
+            return;
+        }
         Session::put('cart',$cart);
         Session::put('total',count($cart));
         Session::put('total_price',$total_price);
@@ -123,9 +129,9 @@ class CartController extends Controller
     }
 
     function getCart(Request $req){
-        Session::flush();
+        // Session::flush();
         
-        Session::save(); //save after flush to make sure session's completely deleted
+        // Session::save(); //save after flush to make sure session's completely deleted
 
 
         return view('client.pages.cart');
