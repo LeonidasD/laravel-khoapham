@@ -10,8 +10,6 @@ use App\ProductBrand;
 class HomeController extends Controller
 {
     //
-    function __construct(){
-    }
     function getHome(){
         
         $products = Product::where('on_sale',1)->orderBy('id','DESC')->limit(5)->get();

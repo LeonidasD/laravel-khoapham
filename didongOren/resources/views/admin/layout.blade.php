@@ -327,5 +327,6 @@
 		<!-- END JAVASCRIPT -->
 
 		@yield('modal')
+		@yield('image')
 	</body>
 </html>

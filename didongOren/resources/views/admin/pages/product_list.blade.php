@@ -4,7 +4,17 @@
 <div id="content">
     <section>
         <div class="section-body">
-            <a href="{{route('addItem')}}"><button class="btn btn-success">Thêm sản phẩm</button></a>
+            <a href="{{route('getAddItem')}}"><button class="btn btn-success">Thêm sản phẩm</button></a>
+            @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{Session::get('success')}}
+                </div>
+            @endif
+            @if(Session::has('error'))
+                <div class="alert alert-danger">
+                    {{Session::get('error')}}
+                </div>
+            @endif
             <div class="row">
                     <table class="table">
                             <thead>
@@ -21,7 +31,7 @@
                                     <th>Chi tiết khuyến mãi</th>
                                     <th>Số lượng</th>
                                     <th>Số lượt mua</th>
-                                    <th>Ẩn/Hiện</th>
+                                    <th>Hiện/Ẩn</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
@@ -36,9 +46,7 @@
                                         <td>{{$product->summary}}</td>
                                         <td>
 											<div>
-												@foreach($product->specification as $specs)
-													{{$specs}}</br>
-												@endforeach
+													<?= $product->specification ?></br>
                                             </div>
                                         </td>
                                         <td><?= number_format($product->price)?> VNĐ</td>
@@ -53,7 +61,7 @@
                                         <td>{{$product->quantity}}</td>
                                         <td>{{$product->buying_count}}</td>
                                         <td><input type="checkbox" value="1" {{($product->on_sale == 1) ? 'checked' : ''}}></td>
-                                        <td width="12%"><a title="Sửa sản phẩm" class="btn-edit-item btn btn-warning" id="btn-edit-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Sửa</span></a>
+                                        <td width="12%"><a href="{{route('getEditItem',$product->id)}}" title="Sửa sản phẩm" class="btn-edit-item btn btn-warning" id="btn-edit-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Sửa</span></a>
                                             <a title="Xoá sản phẩm" class="btn-delete-item btn btn-danger" id="btn-delete-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Xoá</span></a>
                                         </td>
                                     </tr>

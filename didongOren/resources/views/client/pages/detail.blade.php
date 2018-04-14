@@ -246,11 +246,7 @@
 										</div>  --}}
 										<strong>Thông số kỹ thuật</strong>
 										<div>
-											<ol class="dec">
-												@foreach($product->specification as $specs)
-													<li>{{$specs}}</li>
-												@endforeach
-											</ol>
+											<?= $product->specification ?>
 										</div>
 										<div class="add-to-box add-to-cart">
 											<div class="add-to-cart">

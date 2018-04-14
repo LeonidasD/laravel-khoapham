@@ -20,12 +20,12 @@ Route::get('/',[
 // List Controller //
 Route::group(['prefix'=>'list'],function(){
 
-    Route::get('search/{page?}',[
+    Route::get('search-result',[
     'uses' => 'ListController@getSearchResult',
     'as' => 'search'
-]);
+    ]);
 
-    Route::get('{id}/{page?}',[
+    Route::get('{id}',[
         'uses' => 'ListController@getProducts',
         'as' => 'list'
     ]);
@@ -61,7 +61,7 @@ Route::get('checkout',[
     'uses' => 'CheckoutController@getCheckoutForm',
     'as' => 'getCheckout'
 ]);
-Route::get('finish',[
+Route::post('checkout',[
     'uses' => 'CheckoutController@finishCheckout',
     'as' => 'checkout'
 ]);
@@ -98,20 +98,57 @@ Route::prefix('admin')->group(function(){
             'as' => 'getDashboard'
         ]);
     
-        Route::get('productlist',[
-            'uses' => 'AdminController@GetProductList',
-            'as' => 'productList'
+        //Product List
+        Route::group(['prefix'=> 'product'],function(){
+            Route::get('product-list',[
+                'uses' => 'AdminController@GetProductList',
+                'as' => 'productList'
+            ]);
+        
+            Route::get('add-item',[
+                'uses' => 'AdminController@GetAddProduct',
+                'as' => 'getAddItem'
+            ]);
+
+            Route::post('postAddItem',[
+                'uses' => 'AdminController@PostAddProduct',
+                'as' => 'postAddItem'
+            ]);
+
+            Route::get('edit-item/{id}',[
+                'uses' => 'AdminController@GetEditProduct',
+                'as' => 'getEditItem'
+            ]);
+
+            Route::post('postEditItem',[
+                'uses' => 'AdminController@PostEditProduct',
+                'as' => 'postEditItem'
+            ]);
+            
+            Route::get('deleteItem',[
+                'uses' => 'AdminController@GetDeteleProduct',
+                'as' => 'deleteItem'
+            ]);
+        });
+    });
+
+    //Bill List
+    Route::group(['prefix' => 'bill'], function(){
+        Route::get('bill-list',[
+            'uses' => 'AdminController@GetBillList',
+            'as' => 'billList'
         ]);
-    
-        Route::get('addItem',[
-            'uses' => 'AdminController@GetAddProduct',
-            'as' => 'addItem'
+
+        Route::get('cancel-bill',[
+            'uses' => 'AdminController@CancelBill',
+            'as' => 'cancelBill'
         ]);
-    
-        Route::get('deleteItem',[
-            'uses' => 'AdminController@GetDeteleProduct',
-            'as' => 'deleteItem'
+
+        Route::get('confirm-bill',[
+            'uses' => 'AdminController@ConfirmBill',
+            'as' => 'confirmBill'
         ]);
     });
-    
+
+
 });

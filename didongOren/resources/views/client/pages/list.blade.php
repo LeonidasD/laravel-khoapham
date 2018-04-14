@@ -234,13 +234,13 @@
 									   <ul class="select-limiter">
 										   @for($i = 5; $i<= 20; $i+= 5)
 												@if(isset($id))
-													<li><a href="{{route('list',['id'=> $id,'page'=> $i])}}"
+													<li><a href="{{route('list',['id'=> $id,'limit'=> $i])}}"
 												@else
-													<li><a href="{{route('search',['search'=> $search,'page'=> $i])}}"
+													<li><a href="{{route('search',['search'=> $search,'limit'=> $i])}}"
 												@endif
 												
-												@if(isset($page))
-													@if($i == $page) class="selected" @endif>{{$i}}</a></li>
+												@if(isset($limit))
+													@if($i == $limit) class="selected" @endif>{{$i}}</a></li>
 												@else
 													@if($i == 5) class="selected" @endif>{{$i}}</a></li>
 												@endif
@@ -251,7 +251,11 @@
 								 </div>
 							  </div>
 						   </div>
-						   {{$products->links()}}
+						   	@if(!isset($id))
+								{{$products->appends(['search' => $search, 'limit' => $limit])->links()}}
+							@else
+								{{$products->appends(['limit'=> $limit])->links()}}
+							@endif
 						</div>
 						<ol class="products-list">
 							@foreach($products as $product)
@@ -329,13 +333,13 @@
 										<ul class="select-limiter">
 											@for($i = 5; $i<= 20; $i+= 5)
 													@if(isset($id))
-														<li><a href="{{route('list',['id'=> $id,'page'=> $i])}}"
+														<li><a href="{{route('list',['id'=> $id,'limit'=> $i])}}"
 													@else
-														<li><a href="{{route('search',['search'=> $search,'page'=> $i])}}"
+														<li><a href="{{route('search',['search'=> $search,'limit'=> $i])}}"
 													@endif
 													
-													@if(isset($page))
-														@if($i == $page) class="selected" @endif>{{$i}}</a></li>
+													@if(isset($limit))
+														@if($i == $limit) class="selected" @endif>{{$i}}</a></li>
 													@else
 														@if($i == 5) class="selected" @endif>{{$i}}</a></li>
 													@endif

@@ -13,7 +13,12 @@ class Product extends Model
     function ProductBrand(){
         return $this->belongsTo('App\ProductBrand','id_brand','id');
     }
+
     function ProductType(){
         return $this->belongsTo('App\ProductType','id_type','id');
+    }
+
+    function PageUrl(){
+        return $this->belongsTo('App\PageUrl','id_url','id');
     }
 }

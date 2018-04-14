@@ -34,21 +34,14 @@
             </li><!--end /menu-li -->
             <!-- END DASHBOARD -->
 
-            <!-- BEGIN EMAIL -->
-            <li class="gui-folder">
-                <a>
-                    <div class="gui-icon"><i class="md md-email"></i></div>
-                    <span class="title">Email</span>
+            <!-- BEGIN DASHBOARD -->
+            <li>
+                <a href="{{route('billList')}}" >
+                    <div class="gui-icon"><i class="md md-check"></i></div>
+                    <span class="title">Đơn hàng</span>
                 </a>
-                <!--start submenu -->
-                <ul>
-                    <li><a href="../../html/mail/inbox.html" ><span class="title">Inbox</span></a></li>
-                    <li><a href="../../html/mail/compose.html" ><span class="title">Compose</span></a></li>
-                    <li><a href="../../html/mail/reply.html" ><span class="title">Reply</span></a></li>
-                    <li><a href="../../html/mail/message.html" ><span class="title">View message</span></a></li>
-                </ul><!--end /submenu -->
             </li><!--end /menu-li -->
-            <!-- END EMAIL -->
+            <!-- END DASHBOARD -->
 
 
 

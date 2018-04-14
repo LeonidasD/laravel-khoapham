@@ -274,6 +274,37 @@ $('.btn-cart, .qty-change-right').click(function(){
                 $('#addToCartModal').modal('show');
                  //Create jQuery object from the response HTML.
                 var total = $(data);
+                if(total.hasClass('current-qty')){
+                    var id = total.filter('.current-qty').attr('data-id');
+                    var current_qty = total.filter('.current-qty').text();
+                    var summary = total.filter('.summary').text();
+                    $('div.summary > p.subtotal > span.price').text(summary);
+                    $('.qty-header').each(function(){
+                        if($(this).attr('data-id') == id)
+                            $(this).val(current_qty);
+                    });
+                }
+                else{
+                    var item = total.filter('.item').html();
+                    if($('.mini-cart').has('.summary').length){
+                        var summary = total.filter('.summary').text();
+                        $('div.summary > p.subtotal > span.price').text(summary);
+                    }
+                    else{
+                        var summary = total.filter('.summary').html();
+                        var checkoutBtn = total.filter('.checkout-button');
+                        checkoutBtn.find('div > a.btn-checkout').attr('href',"{{route('getCheckout')}}");
+                        checkoutBtn.find('div > a.btn-mycart').attr('href',"{{route('cart')}}");
+                        $('.mini-cart').append(summary);
+                        $('.mini-cart').append(checkoutBtn);
+                    }
+
+                    var total_qty = total.filter('.total-qty').text();
+
+                    $('div.cart-mini > div.title > span.item').text(total_qty);
+                    $('.block-subtitle').text('Sản phẩm mới được thêm');
+                    $('.mini-products-list').append(item);
+                }
             },
             error: function(error){
                 alert(error.responseText);

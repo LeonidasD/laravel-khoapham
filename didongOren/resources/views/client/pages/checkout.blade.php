@@ -138,7 +138,8 @@
                                     <p>Tổng cộng: <?= number_format(Session::get('total_price'));?> VNĐ
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{{route('checkout')}}" method="GET">
+                                    <form action="{{route('checkout')}}" method="POST">
+                                        {{csrf_field()}}
                                         <div class="form-group">
                                             <label for="name">Họ tên</label>
                                             <input class="form-control" type="text" id="name" name="name" placeholder="Họ tên của bạn">
