@@ -104,6 +104,11 @@ Route::prefix('admin')->group(function(){
                 'uses' => 'AdminController@GetProductList',
                 'as' => 'productList'
             ]);
+
+            Route::get('show-hide-item',[
+                'uses' => 'AdminController@ShowHideProduct',
+                'as' => 'showHideItem'
+            ]);
         
             Route::get('add-item',[
                 'uses' => 'AdminController@GetAddProduct',
@@ -130,25 +135,27 @@ Route::prefix('admin')->group(function(){
                 'as' => 'deleteItem'
             ]);
         });
+
+        //Bill List
+        Route::group(['prefix' => 'bill'], function(){
+            Route::get('bill-list',[
+                'uses' => 'AdminController@GetBillList',
+                'as' => 'billList'
+            ]);
+
+            Route::get('cancel-bill',[
+                'uses' => 'AdminController@CancelBill',
+                'as' => 'cancelBill'
+            ]);
+
+            Route::get('confirm-bill',[
+                'uses' => 'AdminController@ConfirmBill',
+                'as' => 'confirmBill'
+            ]);
+        });
     });
 
-    //Bill List
-    Route::group(['prefix' => 'bill'], function(){
-        Route::get('bill-list',[
-            'uses' => 'AdminController@GetBillList',
-            'as' => 'billList'
-        ]);
-
-        Route::get('cancel-bill',[
-            'uses' => 'AdminController@CancelBill',
-            'as' => 'cancelBill'
-        ]);
-
-        Route::get('confirm-bill',[
-            'uses' => 'AdminController@ConfirmBill',
-            'as' => 'confirmBill'
-        ]);
-    });
+    
 
 
 });

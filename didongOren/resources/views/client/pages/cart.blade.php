@@ -116,6 +116,11 @@
                         </div>
                     </div>
                     <div id="main" class="col-lg-9 col-md-9 col-sm-8 col-xs-12 col-main">
+                            @if(Session::has('message'))
+                                <div class="alert alert-success">
+                                    {{Session::get('message')}}
+                                </div>
+                            @endif
                             <div class="product-name">
                                 <h1>Giỏ hàng</h1>
                             <div>

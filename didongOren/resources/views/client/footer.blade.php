@@ -285,7 +285,9 @@ $('.btn-cart, .qty-change-right').click(function(){
                     });
                 }
                 else{
-                    var item = total.filter('.item').html();
+                    var item = total.filter('.item');
+                    item.find('li > a.btn-remove').attr('data-id',product_id);
+                    item.find('li > a.btn-remove').attr('data-name',product_name);
                     if($('.mini-cart').has('.summary').length){
                         var summary = total.filter('.summary').text();
                         $('div.summary > p.subtotal > span.price').text(summary);
@@ -296,14 +298,14 @@ $('.btn-cart, .qty-change-right').click(function(){
                         checkoutBtn.find('div > a.btn-checkout').attr('href',"{{route('getCheckout')}}");
                         checkoutBtn.find('div > a.btn-mycart').attr('href',"{{route('cart')}}");
                         $('.mini-cart').append(summary);
-                        $('.mini-cart').append(checkoutBtn);
+                        $('.mini-cart').append(checkoutBtn.html());
                     }
 
                     var total_qty = total.filter('.total-qty').text();
 
                     $('div.cart-mini > div.title > span.item').text(total_qty);
                     $('.block-subtitle').text('Sản phẩm mới được thêm');
-                    $('.mini-products-list').append(item);
+                    $('.mini-products-list').append(item.html());
                 }
             },
             error: function(error){
@@ -337,7 +339,9 @@ $('.btn-cart, .qty-change-right').click(function(){
                     });
                 }
                 else{
-                    var item = total.filter('.item').html();
+                    var item = total.filter('.item');
+                    item.find('li > a.btn-remove').attr('data-id',product_id);
+                    item.find('li > a.btn-remove').attr('data-name',product_name);
                     if($('.mini-cart').has('.summary').length){
                         var summary = total.filter('.summary').text();
                         $('div.summary > p.subtotal > span.price').text(summary);
@@ -348,14 +352,14 @@ $('.btn-cart, .qty-change-right').click(function(){
                         checkoutBtn.find('div > a.btn-checkout').attr('href',"{{route('getCheckout')}}");
                         checkoutBtn.find('div > a.btn-mycart').attr('href',"{{route('cart')}}");
                         $('.mini-cart').append(summary);
-                        $('.mini-cart').append(checkoutBtn);
+                        $('.mini-cart').append(checkoutBtn.html());
                     }
 
                     var total_qty = total.filter('.total-qty').text();
 
                     $('div.cart-mini > div.title > span.item').text(total_qty);
                     $('.block-subtitle').text('Sản phẩm mới được thêm');
-                    $('.mini-products-list').append(item);
+                    $('.mini-products-list').append(item.html());
                     
 
                 }
@@ -390,20 +394,21 @@ $('.btn-confirm-delete').click(function(){
             $('#deleteAsk').modal('hide');
             $('#addToCartModal').modal('hide');
             var total = parseInt($.trim(data));
-            if(!isNaN(total)){
-                $("div.cart-mini > div > span").html(total);
-                //Note, load automatically replaces content. Be sure to include a space before the id selector.
+            if(total == 0){
+                $('div.summary').remove();
+                $('div.actions').remove();
+                $('p.block-subtitle').html('KHÔNG CÓ SẢN PHẨM NÀO');
             }
-            $('#product-'+ product_id).hide();
+
+            $("div.cart-mini > div > span").html(total);
+            $('li#product-'+ product_id).hide();
+            $('tr#product-'+ product_id).hide();
+   
         },
         error: function(error){
             alert(error.responseText);
         }
     })
-})
-
-$('.qty-change-left').click(function(){
-    var product_id = $('.qty-header').attr('data-id-decrement-header');
 })
 </script>
 

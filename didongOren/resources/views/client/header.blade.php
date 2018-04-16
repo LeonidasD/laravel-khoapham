@@ -140,7 +140,7 @@
                                     <ul>
                                         <li class="item1 first"><a href="{{route('home')}}">Trang chủ</a></li>
                                         <li class="item2 megamenu-parent">
-                                            <a href="grid.html">Tablets</a>
+                                            <a href="grid.html">Máy tính bảng</a>
                                             <img class="stick-07" src="{{URL::asset('images/stick/sale07.png')}}" alt="" />
                                             <div class="vt_megamenu_content">
                                                 <div class="mega-menu-01">
@@ -158,7 +158,7 @@
                                                     <div class="menu-01 menu-01-top">
                                                         <div class="title"><span>Tops</span><span class="hot">Hot</span></div>
                                                         <ul class="content-col">
-                                                            <li class="first"><a href="#"><span>Smartphones</span></a></li>
+                                                            <li class="first"><a href="#"><span>Điện thoại</span></a></li>
                                                             <li><a href="#"><span>Accessories</span></a></li>
                                                             <li><a href="#"><span>Headsets</span></a></li>
                                                             <li><a href="#"><span>Batteries</span></a></li>
@@ -210,7 +210,7 @@
                                             </div>
                                         </li>
                                         <li class="item3 megamenu-parent">
-                                            <a href="grid.html">smart phone</a>
+                                            <a href="grid.html">di động</a>
                                             <img class="stick-07" src="{{URL::asset('images/stick/new07.png')}}" alt=""/>
                                             <div class="vt_megamenu_content">
                                                 <div class="mega-menu-02">
@@ -503,9 +503,9 @@
                                             <a href="grid.html">laptops </a>
                                             <img class="stick-07" src="{{URL::asset('images/stick/hot07.png')}}" alt=""/>
                                         </li>
-                                        <li class="item5"><a href="grid.html">Desktops</a></li>
-                                        <li class="item6"><a href="#">Computer Accessories</a></li>
-                                        <li class="item7 last"><a href="grid.html">Cameras & Photo</a></li>
+                                        <li class="item5"><a href="grid.html">Máy tính bàn</a></li>
+                                        <li class="item6"><a href="#">Phụ kiện</a></li>
+                                        <li class="item7 last"><a href="grid.html">Máy ảnh</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -514,7 +514,7 @@
                             <div class="box-cart">
                                 <div class="cart-mini">
                                     <div class="title">
-                                        <span class="item">{{Session::get('total')}}</span>
+                                        <span class="item">@if(Session::get('total') > 0) {{Session::get('total')}} @else 0 @endif</span>
                                     </div>
                                     <div class="block-content">
                                         <div class="inner mini-cart">

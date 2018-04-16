@@ -52,8 +52,7 @@ class CheckoutController extends Controller
             $bill_detail->save();
         }
 
-
-        Mail::send('client.mail', compact('customer'), function($message) use ($customer) {
+        Mail::send('client.mail', compact('customer','bill'), function($message) use ($customer) {
             $message->to($customer->email, $customer->name)->subject
                ("Hoá đơn của anh/chị ". $customer->name);
             $message->from('duc.huu128@gmail.com','Shop Công nghệ Oren');

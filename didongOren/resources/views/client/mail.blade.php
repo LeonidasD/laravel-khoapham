@@ -15,6 +15,6 @@
         <hr>
     @endforeach
     <ul>
-@if(isset($note))
-<div><strong>Ghi chú đơn hàng:</strong> {{$email}}</div>
+@if($bill->note != '')
+<div><strong>Ghi chú đơn hàng:</strong> {{$bill->note}}</div>
 @endif

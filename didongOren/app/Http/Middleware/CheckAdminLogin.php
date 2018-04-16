@@ -16,8 +16,8 @@ class CheckAdminLogin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check())
-            return $next($request);
-        return redirect()->route('getLogin')->with('message','Vui lòng đăng nhập!');
+        if(!Auth::check())
+            return redirect()->route('getLogin')->with('error','Vui lòng đăng nhập!');
+        return $next($request);
     }
 }

@@ -88,25 +88,23 @@ class CartController extends Controller
     
     function updateCart(Request $req){
         $qty = $req->qty;
-        $product_id = $req->id;
         $cart = Session::get('cart');
-        if(Session::has('total_price')){
-            $total_price = Session::get('total_price');
-            //total price += price * (currentQty - cartQty)
-            $total_price += $cart[$product_id]['product']->price * ($currentQty-$cart[$product_id]['quantity']);
-        }
+
         if(is_array($qty)){
             foreach($qty as $key=>$value){
                 $value = intval($value);
+                if(Session::has('total_price')){
+                    $total_price = Session::get('total_price');
+                    //total price += price * (currentQty - cartQty)
+                    $total_price += $cart[$key]['product']->price * ($cart[$key]['quantity']-$value);
+                }
                 $cart[$key]['quantity'] = $value;
             }
-        }
-        else{
-            $cart[$product_id]['quantity'] = $qty;
         }
         Session::put('cart',$cart);
         Session::put('total',count($cart));
         Session::put('total_price',$total_price);
+        return redirect()->route('cart')->with('message','Cập nhật giỏ hàng thành công');
     }
 
     function deleteCartItem(Request $req){
@@ -119,6 +117,7 @@ class CartController extends Controller
             Session::forget('cart');
             Session::forget('total');
             Session::forget('total_price');
+            echo 0;
             return;
         }
         Session::put('cart',$cart);

@@ -60,7 +60,7 @@
                                         @endif
                                         <td>{{$product->quantity}}</td>
                                         <td>{{$product->buying_count}}</td>
-                                        <td><input type="checkbox" value="1" {{($product->on_sale == 1) ? 'checked' : ''}}></td>
+                                        <td><input class="chk-hide" id="chk-hide" type="checkbox" value="1" {{($product->on_sale == 1) ? 'checked' : ''}} data-id="{{$product->id}}"></td>
                                         <td width="12%"><a href="{{route('getEditItem',$product->id)}}" title="Sửa sản phẩm" class="btn-edit-item btn btn-warning" id="btn-edit-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Sửa</span></a>
                                             <a title="Xoá sản phẩm" class="btn-delete-item btn btn-danger" id="btn-delete-cart" data-toggle="modal" data-id="{{$product->id}}" data-name="{{$product->name}}"><span>Xoá</span></a>
                                         </td>
@@ -139,6 +139,28 @@
                 else {
                     $('.delete_alert').html('Xoá thất bại ' + product_id + ' ' + product_name);
                 }
+            },
+            error: function(error){
+                alert(error.responseText);
+            }
+        })
+    });
+    $('.chk-hide').click(function(){
+        var product_id = $(this).attr('data-id');
+        var status = 0;
+        var check = document.getElementById('chk-hide').checked;
+        if (check) {
+            status = 1;
+        }
+        $.ajax({
+            url: "{{route('showHideItem')}}",
+            data: {
+                id: product_id,
+                status: status
+            },
+            type: "GET",
+            success: function(data){
+                alert('Thành công');
             },
             error: function(error){
                 alert(error.responseText);

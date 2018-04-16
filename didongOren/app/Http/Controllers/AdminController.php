@@ -85,6 +85,14 @@ class AdminController extends Controller
         return view('admin.pages.product_list',compact('product_list'));
     }
 
+    function ShowHideProduct(Request $req){
+        $hidden_product = Product::where('id',$req->id)->first();
+        $hidden_product->on_sale = $req->status;
+        echo $req->status;
+        echo $hidden_product->on_sale;
+        $hidden_product->save();
+    }
+
     function GetAddProduct(){
         $brands = ProductBrand::get();
         $types = ProductType::get();

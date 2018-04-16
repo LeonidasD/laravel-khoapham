@@ -224,11 +224,7 @@
 										<div class="price-box">
 											<p class="old-price">
 												<span class="price">
-												$1.459.00</span>
-											</p>
-											<p class="special-price">
-												<span class="price">
-												<?= number_format($product->price)?> VNĐ</span>
+													<?= number_format($product->price)?> VNĐ</span>
 											</p>
 										</div>
 									</div>
